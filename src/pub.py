@@ -22,9 +22,14 @@ class Pub:
     
     def sell_drink(self, customer, drink_name):
         drink = self.find_drink_by_name(drink_name)
-        if customer.wallet >= drink.price and drink in self.drinks and self.check_overage(customer):
-            self.increase_till(drink.price)
-            customer.decrease_wallet(drink.price)
+        drunkenness = customer.get_drunkenness()
+        if drunkenness < 10:
+            if drink in self.drinks:
+                if customer.wallet >= drink.price:
+                    if self.check_overage(customer):
+                        self.increase_till(drink.price)
+                        customer.decrease_wallet(drink.price)
+                        customer.increase_drunkenness(drink)
 
         
 
