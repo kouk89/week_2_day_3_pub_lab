@@ -5,3 +5,6 @@ class Customer:
     
     def get_wallet_amount(self):
         return self.wallet
+    
+    def decrease_wallet(self,amount):
+        self.wallet -= amount

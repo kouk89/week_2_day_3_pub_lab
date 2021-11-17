@@ -1,3 +1,5 @@
+
+
 class Pub:
     def __init__(self, name, till):
         self.name = name
@@ -14,3 +16,13 @@ class Pub:
         for drink in self.drinks:
             if drink.name == drink_name:
                 return drink
+    
+    def sell_drink(self, customer, drink_name):
+        drink = self.find_drink_by_name(drink_name)
+        if customer.wallet >= drink.price and drink in self.drinks:
+            self.increase_till(drink.price)
+            customer.decrease_wallet(drink.price)
+            
+        
+
+

@@ -8,6 +8,7 @@ class TestPub(unittest.TestCase):
     def setUp(self):
         self.pub = Pub("The Prancing Pony", 100.00)
         self.customer = Customer("Frodo", 5.00)
+        self.customer_new = Customer("Sam", 1.00)
         self.drink_beer = Drink("Beer", 2.50)
 
     def test_pub_has_name(self):
@@ -29,11 +30,19 @@ class TestPub(unittest.TestCase):
         result = self.pub.find_drink_by_name("Beer")
         self.assertEqual("Beer", result.name)
 
-    def test_sell_drink(self):
+    def test_sell_drink__sufficient_funds(self):
         self.pub.add_drink_to_drinks(self.drink_beer)
         self.pub.sell_drink(self.customer, "Beer")
         self.assertEqual(102.50, self.pub.till)
         self.assertEqual(2.50, self.customer.wallet)
+    
+    def test_for_drink__insufficient_funds(self):
+        self.pub.add_drink_to_drinks(self.drink_beer)
+        self.pub.sell_drink(self.customer_new, "Beer")
+        self.assertEqual(100.00, self.pub.till)
+        self.assertEqual(1.00, self.customer_new.wallet)
+        
+        
 
         
 
