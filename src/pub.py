@@ -5,17 +5,26 @@ class Pub:
         self.name = name
         self.till = till
         self.drinks = []
+        self.foods = []
 
     def increase_till(self, amount):
         self.till += amount
 
     def add_drink_to_drinks(self, drink):
         self.drinks.append(drink)
+    
+    def add_food_to_foods(self, food):
+        self.foods.append(food)
 
     def find_drink_by_name(self, drink_name):
         for drink in self.drinks:
             if drink.name == drink_name:
                 return drink
+    
+    def find_food_by_name(self, food_name):
+        for food in self.foods:
+            if food.name == food_name:
+                return food
     
     def check_overage(self, customer):
         return customer.get_age() >= 18
