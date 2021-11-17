@@ -17,12 +17,15 @@ class Pub:
             if drink.name == drink_name:
                 return drink
     
+    def check_overage(self, customer):
+        return customer.get_age() >= 18
+    
     def sell_drink(self, customer, drink_name):
         drink = self.find_drink_by_name(drink_name)
-        if customer.wallet >= drink.price and drink in self.drinks:
+        if customer.wallet >= drink.price and drink in self.drinks and self.check_overage(customer):
             self.increase_till(drink.price)
             customer.decrease_wallet(drink.price)
-            
+
         
 
 
