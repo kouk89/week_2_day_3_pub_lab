@@ -80,12 +80,22 @@ class TestPub(unittest.TestCase):
     
     def test_sell_food__sufficient_funds(self):
         self.pub.add_food_to_foods(self.food_nachos)
-        self.pub.add_drink_to_drinks(self.drink_beer)
+        self.pub.add_drink_to_drinks(self.drink_strong)
         self.pub.sell_drink(self.customer, "Zombie")
         self.pub.sell_food(self.customer, "Nachos")
         self.assertEqual(103.00, self.pub.till)
         self.assertEqual(2, self.customer.drunkenness )
         self.assertEqual(2, self.customer.wallet)
+    
+    def test_initialise_stock(self):
+        self.pub.add_drink_to_drinks(self.drink_strong)
+        self.assertEqual(1, self.pub.stock["Zombie"])
+    
+    def test_sell_drink__reduce_stock(self):
+        self.pub.add_drink_to_drinks(self.drink_strong)
+        self.pub.sell_drink(self.customer, "Zombie")
+        self.assertEqual(0, self.pub.stock["Zombie"])
+
 
         
 
