@@ -11,3 +11,5 @@ class TestCustomer(unittest.TestCase):
     def test_customer_wallet_amount(self):
         result = self.customer.get_wallet_amount()
         self.assertEqual(5.00, result)
+
+    
